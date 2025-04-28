@@ -1,4 +1,5 @@
 import { User } from "../models/UserModel.js";
+import { Store } from "../models/StoreModel.js";
 import { createSecretToken } from "../util/SecretToken.js";
 import bcrypt from "bcrypt";
 
@@ -12,6 +13,8 @@ export const Register = async (req, res, next) => {
     }
     const hasedPassword = await bcrypt.hash(password, 12);
     const user = await User.create({ ...req.body, password: hasedPassword });
+    //create store alongside user with the same name
+    const store = await Store.create({ name: username });
     //Assign JWT TOKEN to the user
     const token = createSecretToken(user._id);
 

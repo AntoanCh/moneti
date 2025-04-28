@@ -48,6 +48,18 @@ router.get("/:id", async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 });
+//Route for Get One Store from database by name
+router.get("/name/:name", async (req, res) => {
+  try {
+    const { name } = req.params;
+    const store = await Store.find({ name: name });
+
+    return res.status(200).json(store);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send({ message: err.message });
+  }
+});
 
 //Route for Deleting a Store
 router.delete("/:id", async (req, res) => {

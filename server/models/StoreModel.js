@@ -6,6 +6,10 @@ export const storeSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    balance: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: true,

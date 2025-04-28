@@ -11,10 +11,7 @@ export const recordSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    debt: {
-      type: Number,
-      required: true,
-    },
+
     recieved: {
       type: Number,
       required: true,

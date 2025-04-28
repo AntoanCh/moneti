@@ -32,6 +32,7 @@ app.use("/api/stores", storeRoutes);
 app.use("/api/records", recordRoutes);
 
 //MONGODB CONNECTION
+
 mongoose
   .connect(MONGO_URL)
   .then(() => {
