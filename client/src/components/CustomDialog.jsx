@@ -31,8 +31,8 @@ const CustomDialog = ({ open, setOpen, store }) => {
         {
           time: dayjs(),
           balance: store.balance,
-          income: open.type === "income" ? value : 0,
-          expense: open.type === "expense" ? value : 0,
+          type: open.type,
+          value: value,
           storeName: store.name,
           storeId: store._id,
           edited: false,

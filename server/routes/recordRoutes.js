@@ -1,5 +1,6 @@
 import express from "express";
 import { Record } from "../models/RecordModel.js";
+import {Store} from "../models/StoreModel.js"
 
 const router = express.Router();
 
@@ -8,12 +9,11 @@ router.post("/", async (req, res) => {
   try {
     if (
       !req.body.time ||
-      !req.body.balance ||
-      !req.body.income ||
-      !req.body.expense ||
+      !req.body.type ||
+      !req.body.value ||
       !req.body.storeName ||
       !req.body.storeId ||
-      !req.body.edited
+      
     ) {
       return res.status(400).send({
         message: "Send all required fields",
@@ -22,8 +22,8 @@ router.post("/", async (req, res) => {
     const newRecord = {
       time: req.body.time,
       balance: req.body.balance,
-      income: req.body.income,
-      expense: req.body.expense,
+      type: req.body.type,
+      value: req.body.value,
       storeName: req.body.storeName,
       storeId: req.body.storeId,
       edited: req.body.edited,
@@ -31,6 +31,8 @@ router.post("/", async (req, res) => {
       editValue: req.body.editValue,
     };
     const record = await Record.create(newRecord);
+  
+    const store = await Store.findByIdAndUpdate(req.body.storeId, {balance: req.body.type === "income" ? req.body.balance + req.body.value : req.body.balance - req.body.value})
     return res.status(201).send(record);
   } catch (err) {
     console.log(err.message);
@@ -42,12 +44,10 @@ router.put("/:id", async (req, res) => {
   try {
     if (
       !req.body.time ||
-      !req.body.balance ||
-      !req.body.income ||
-      !req.body.expense ||
+      !req.body.type ||
+      !req.body.value ||
       !req.body.storeName ||
       !req.body.storeId ||
-      !req.body.edited ||
       !req.body.editTime ||
       !req.body.editValue
     ) {
