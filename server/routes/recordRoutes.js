@@ -9,8 +9,8 @@ router.post("/", async (req, res) => {
     if (
       !req.body.time ||
       !req.body.balance ||
-      !req.body.recieved ||
-      !req.body.sent ||
+      !req.body.income ||
+      !req.body.expense ||
       !req.body.storeName ||
       !req.body.storeId ||
       !req.body.edited
@@ -22,8 +22,8 @@ router.post("/", async (req, res) => {
     const newRecord = {
       time: req.body.time,
       balance: req.body.balance,
-      recieved: req.body.recieved,
-      sent: req.body.sent,
+      income: req.body.income,
+      expense: req.body.expense,
       storeName: req.body.storeName,
       storeId: req.body.storeId,
       edited: req.body.edited,
@@ -43,8 +43,8 @@ router.put("/:id", async (req, res) => {
     if (
       !req.body.time ||
       !req.body.balance ||
-      !req.body.recieved ||
-      !req.body.sent ||
+      !req.body.income ||
+      !req.body.expense ||
       !req.body.storeName ||
       !req.body.storeId ||
       !req.body.edited ||

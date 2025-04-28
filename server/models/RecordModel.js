@@ -12,11 +12,11 @@ export const recordSchema = mongoose.Schema(
       required: true,
     },
 
-    recieved: {
+    income: {
       type: Number,
       required: true,
     },
-    sent: {
+    expense: {
       type: Number,
       required: true,
     },

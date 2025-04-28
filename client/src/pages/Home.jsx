@@ -5,28 +5,18 @@ import { Button } from "@mui/material";
 import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
-
-const BigButton = styled(Button)({
-  fontWeight: 800,
-  fontSize: 24,
-  padding: 12,
-  borderRadius: 4,
-  border: "grey solid 4px",
-  minHeight: "100%",
-  minHeight: "150px",
-  "&:Hover": {
-    boxShadow: "5px 3px 3px 3px white",
-  },
-});
+import CustomDialog from "../components/CustomDialog.jsx";
 
 const Home = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const token = localStorage.getItem("token");
-  const [balance, setBalance] = useState("");
+  const [store, setStore] = useState({});
+
   const [isLoading, setIsLoading] = useState(true);
   const [isRefetching, setIsRefetching] = useState(true);
   const [error, setError] = useState({ show: false, message: "" });
+  const [open, setOpen] = useState({ show: false, type: "" });
 
   useEffect(() => {
     const verifyUser = async () => {
@@ -57,7 +47,7 @@ const Home = () => {
   }, [token, navigate]);
   useEffect(() => {
     const fetchData = async () => {
-      if (!balance) {
+      if (!store.balance) {
         setIsLoading(true);
       } else {
         setIsRefetching(true);
@@ -68,8 +58,8 @@ const Home = () => {
           const res = await axios.get(
             `http://192.168.0.147:6969/api/stores/name/${username}`
           );
-          setBalance(res.data.data);
-          console.log(res);
+          setStore(res.data[0]);
+          console.log(res.data);
         } catch (error) {
           setError({
             show: true,
@@ -85,6 +75,10 @@ const Home = () => {
     };
     fetchData();
   }, [username]);
+
+  const handleOpen = (type) => {
+    setOpen({ show: true, type: type });
+  };
   const Logout = () => {
     localStorage.removeItem("token");
     navigate("/login");
@@ -96,18 +90,33 @@ const Home = () => {
         justifyContent: "center",
       }}
     >
+      {open && <CustomDialog open={open} setOpen={setOpen} store={store} />}
       <Box sx={{ width: "80%", height: "100%" }}>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
+            // display: "flex",
+            // justifyContent: "space-between",
             width: "80%",
             height: "100%",
             padding: 4,
             marginX: "auto",
           }}
         >
-          <TextField disabled label="fullWidth" id="fullWidth" />
+          <TextField disabled id="fullWidth" value={store.balance} />
+          <Button
+            onClick={() => handleOpen("income")}
+            color="success"
+            variant="contained"
+          >
+            ПРИХОД
+          </Button>
+          <Button
+            onClick={() => handleOpen("expense")}
+            color="error"
+            variant="contained"
+          >
+            РАЗХОД
+          </Button>
         </Box>
       </Box>
     </Box>
