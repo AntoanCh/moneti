@@ -63,24 +63,28 @@ const Home = () => {
         setIsRefetching(true);
       }
 
-      try {
-        const res = await axios.get(
-          `http://192.168.0.147:6969/api/stores/name/${username}`
-        );
-        setBalance(res.data.data);
-      } catch (error) {
-        setError({
-          show: true,
-          message: `Грешка при комуникация: ${error}`,
-        });
+      if (username) {
+        try {
+          const res = await axios.get(
+            `http://192.168.0.147:6969/api/stores/name/${username}`
+          );
+          setBalance(res.data.data);
+          console.log(res.data);
+        } catch (error) {
+          setError({
+            show: true,
+            message: `Грешка при комуникация: ${error}`,
+          });
 
-        return;
+          return;
+        }
       }
+
       setIsLoading(false);
       setIsRefetching(false);
     };
     fetchData();
-  }, []);
+  }, [username]);
   const Logout = () => {
     localStorage.removeItem("token");
     navigate("/login");
