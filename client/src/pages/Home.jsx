@@ -69,7 +69,7 @@ const Home = () => {
             `http://192.168.0.147:6969/api/stores/name/${username}`
           );
           setBalance(res.data.data);
-          console.log(res.data);
+          console.log(res);
         } catch (error) {
           setError({
             show: true,

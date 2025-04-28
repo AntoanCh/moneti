@@ -5,6 +5,7 @@ export const storeSchema = mongoose.Schema(
     name: {
       type: String,
       required: true,
+      uppercase: true,
     },
     balance: {
       type: Number,

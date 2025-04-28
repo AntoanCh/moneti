@@ -1,5 +1,6 @@
 import express from "express";
 import { User } from "../models/UserModel.js";
+import { Store } from "../models/StoreModel.js";
 
 const router = express.Router();
 
@@ -37,8 +38,13 @@ router.delete("/:id", async (req, res) => {
     if (!result) {
       return res.status(404).json({ message: "User not found" });
     }
-
-    return res.status(200).send({ message: "User Deleted" });
+    const store = await Store.findOneAndDelete({ name: result.username });
+    if (!store) {
+      return res
+        .status(200)
+        .send({ message: "User Deleted, Store not deleted" });
+    }
+    return res.status(200).send({ message: "User Deleted, Store Deleted" });
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ message: err.message });
