@@ -1,6 +1,6 @@
 import express from "express";
 import { Record } from "../models/RecordModel.js";
-import {Store} from "../models/StoreModel.js"
+import { Store } from "../models/StoreModel.js";
 
 const router = express.Router();
 
@@ -12,8 +12,7 @@ router.post("/", async (req, res) => {
       !req.body.type ||
       !req.body.value ||
       !req.body.storeName ||
-      !req.body.storeId ||
-      
+      !req.body.storeId
     ) {
       return res.status(400).send({
         message: "Send all required fields",
@@ -31,8 +30,13 @@ router.post("/", async (req, res) => {
       editValue: req.body.editValue,
     };
     const record = await Record.create(newRecord);
-  
-    const store = await Store.findByIdAndUpdate(req.body.storeId, {balance: req.body.type === "income" ? req.body.balance + req.body.value : req.body.balance - req.body.value})
+
+    const store = await Store.findByIdAndUpdate(req.body.storeId, {
+      balance:
+        req.body.type === "income"
+          ? req.body.balance + req.body.value
+          : req.body.balance - req.body.value,
+    });
     return res.status(201).send(record);
   } catch (err) {
     console.log(err.message);

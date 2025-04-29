@@ -14,7 +14,7 @@ const ErrorDialog = ({ error, setError }) => {
   };
   return (
     <Dialog
-      PaperComponent={DraggablePaper}
+      // PaperComponent={DraggablePaper}
       open={error.show}
       onClose={handleError}
       aria-labelledby="alert-dialog-title"
@@ -24,7 +24,7 @@ const ErrorDialog = ({ error, setError }) => {
         style={{ cursor: "move", backgroundColor: "#42a5f5" }}
         id="draggable-dialog-title"
       >
-        {"Грешка"}{" "}
+        {"Грешка"}
         <IconButton
           sx={{
             margin: 0,

@@ -21,7 +21,7 @@ const CustomDialog = ({ open, setOpen, store }) => {
   };
 
   const handleChange = (e) => {
-    setValue(e.target.value);
+    setValue(parseInt(e.target.value));
   };
 
   const handleSubmit = async () => {
@@ -40,43 +40,6 @@ const CustomDialog = ({ open, setOpen, store }) => {
       );
     } catch (error) {}
   };
-  //   const handleUpdate = async (e) => {
-  //     e.preventDefault();
-  //     try {
-  //       const { data } = await axios.post(
-  //         "http://192.168.0.147:6969/auth/updaterole",
-  //         {
-  //           ...editRole.user,
-  //         }
-  //       );
-  //       const { status, message } = data;
-
-  //       if (status) {
-  //         setAlert({
-  //           show: true,
-  //           message: `Правата на потребител ${editRole.user.username} са сменени успешно!`,
-  //           severity: "success",
-  //         });
-  //       } else {
-  //         setAlert({
-  //           show: true,
-  //           message: "Грешка при запис",
-  //           severity: "error",
-  //         });
-  //         setErrorBanner({
-  //           show: true,
-  //           message: "Грешка при запис",
-  //           color: "error",
-  //         });
-  //       }
-  //       setIsRefetching(true);
-  //       setRefresh(!refresh);
-  //       setEditRole({ show: false, user: {} });
-  //     } catch (error) {
-  //       setError({ show: true, message: `Грешка при комуникация: ${error}` });
-  //     }
-  //     setEditRole({ show: false, user: {} });
-  //   };
 
   return (
     <Dialog

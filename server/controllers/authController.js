@@ -41,7 +41,6 @@ export const UpdatePswrd = async (req, res, next) => {
     const { password, _id } = req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = await User.findByIdAndUpdate(_id, {
-      ...req.body,
       password: hashedPassword,
     });
     res.status(201).json({
@@ -51,7 +50,6 @@ export const UpdatePswrd = async (req, res, next) => {
       user: {
         _id: user._id,
         username: user.username,
-        role: user.role,
       },
     });
     next();
