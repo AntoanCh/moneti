@@ -9,6 +9,8 @@ import storeRoutes from "./routes/storeRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import bodyParser from "body-parser";
+import path from "path";
+const __dirname = path.resolve();
 
 const { MONGO_URL, PORT } = process.env;
 const app = express();
@@ -30,6 +32,12 @@ app.use("/api/users", userRoutes);
 app.use("/api/stores", storeRoutes);
 // app.use("/api/logs", logRoutes);
 app.use("/api/records", recordRoutes);
+
+//set static folder
+app.use(express.static("build"));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "build", "index.html"));
+});
 
 //MONGODB CONNECTION
 
