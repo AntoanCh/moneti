@@ -35,7 +35,7 @@ app.use("/api/records", recordRoutes);
 
 //set static folder
 app.use(express.static("build"));
-app.get("*", (req, res) => {
+app.get("*name", (req, res) => {
   res.sendFile(path.resolve(__dirname, "build", "index.html"));
 });
 

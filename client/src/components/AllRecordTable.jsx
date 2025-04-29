@@ -80,7 +80,7 @@ const RecordTable = ({ store }) => {
         Cell: ({ cell }) => {
           return (
             <Typography variant="p" sx={{ fontWeight: 800 }}>
-              {dayjs(cell.getValue()).format("DD.MM.YYYY - HH:mm")}
+              {dayjs(cell.getValue()).format("DD.MM.YYYY - HH:mm:ss")}
             </Typography>
           );
         },
