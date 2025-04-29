@@ -239,7 +239,7 @@ const RecordTable = ({ store }) => {
     enableHiding: false,
     enableColumnResizing: true,
     enableRowPinning: true,
-    muiTableContainerProps: { sx: { maxHeight: "70vh" } },
+    // muiTableContainerProps: { sx: { maxHeight: "70vh" } },
     paginationDisplayMode: "pages",
     positionToolbarAlertBanner: "bottom",
     muiSearchTextFieldProps: {
