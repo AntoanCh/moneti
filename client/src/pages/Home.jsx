@@ -26,6 +26,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
+  const [refresh, setRefresh] = useState(false);
   const [changePass, setChangePass] = useState(false);
   const token = localStorage.getItem("token");
 
@@ -104,13 +105,17 @@ const Home = () => {
         </Box>
       </Item>
       <Box
-        display="flex"
+        // display="flex"
         justifyContent="center"
         alignItems="center"
-        sx={{ width: "80%", height: "100%", alignContent: "center" }}
+        sx={{ height: "100%", alignContent: "center" }}
       >
         {username.startsWith("H") ? (
-          <StoreBalance username={username} />
+          <StoreBalance
+            username={username}
+            refresh={refresh}
+            setRefresh={setRefresh}
+          />
         ) : (
           <AllBalances />
         )}

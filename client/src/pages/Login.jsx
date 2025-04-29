@@ -73,7 +73,7 @@ const Login = () => {
           handleSuccess(message);
           setTimeout(() => {
             navigate("/");
-          }, 400);
+          }, 100);
         } else {
           setError({
             show: true,

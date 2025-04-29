@@ -233,7 +233,6 @@ const RecordTable = ({ store }) => {
     enableFullScreenToggle: false,
     enableStickyHeader: true,
     enableGlobalFilter: false,
-    enableColumnFilters: false,
     enableColumnActions: false,
     enableDensityToggle: false,
     enableFacetedValues: true,

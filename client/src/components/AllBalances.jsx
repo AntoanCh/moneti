@@ -54,7 +54,7 @@ const AllBalances = () => {
               WebkitTextFillColor: "#000",
             },
             "& .MuiInputLabel-outlined": {
-              color: "#2e2e2e",
+              color: "#000",
               fontWeight: "bold",
             },
           }}

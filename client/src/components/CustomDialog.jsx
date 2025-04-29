@@ -13,7 +13,7 @@ import Chip from "@mui/material/Chip";
 import dayjs from "dayjs";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
-const CustomDialog = ({ open, setOpen, store }) => {
+const CustomDialog = ({ open, setOpen, store, setRefresh, refresh }) => {
   const [value, setValue] = useState(0);
 
   const handleClose = () => {
@@ -38,11 +38,15 @@ const CustomDialog = ({ open, setOpen, store }) => {
           edited: false,
         }
       );
+      setOpen({ show: false, type: "" });
+      setRefresh(!refresh);
+      setValue(0);
     } catch (error) {}
   };
 
   return (
     <Dialog
+      disableRestoreFocus
       // PaperComponent={DraggablePaper}
       open={open.show}
       onClose={handleClose}
@@ -51,7 +55,10 @@ const CustomDialog = ({ open, setOpen, store }) => {
       maxWidth={"xl"}
     >
       <DialogTitle
-        style={{ cursor: "move", backgroundColor: "#42a5f5" }}
+        style={{
+          cursor: "move",
+          backgroundColor: open.type === "income" ? " #1a9100 " : "#960202",
+        }}
         id="draggable-dialog-title"
       >
         {open.type === "income" ? "ПРИХОД" : "РАЗХОД"}
@@ -69,7 +76,12 @@ const CustomDialog = ({ open, setOpen, store }) => {
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description"></DialogContentText>
-        <TextField onChange={handleChange} value={value} />
+        <TextField
+          autoFocus
+          sx={{ margin: "20px" }}
+          onChange={handleChange}
+          value={value}
+        />
       </DialogContent>
       <DialogActions>
         <Button

@@ -7,7 +7,7 @@ import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import CustomDialog from "../components/CustomDialog.jsx";
 
-const StoreBalance = ({ username }) => {
+const StoreBalance = ({ username, setRefresh, refresh }) => {
   const [store, setStore] = useState({ name: "", balance: 0 });
   const [open, setOpen] = useState({ show: false, type: "" });
   const [isLoading, setIsLoading] = useState(true);
@@ -42,14 +42,13 @@ const StoreBalance = ({ username }) => {
       setIsRefetching(false);
     };
     fetchData();
-  }, [username]);
+  }, [username, refresh]);
 
   const handleOpen = (type) => {
     setOpen({ show: true, type: type });
   };
   return (
-    <Box>
-      {open && <CustomDialog open={open} setOpen={setOpen} store={store} />}
+    <Box sx={{ margin: "10px" }}>
       <TextField
         sx={{
           maxWidth: "50%",
@@ -80,31 +79,33 @@ const StoreBalance = ({ username }) => {
           maximumFractionDigits: 0,
         })}
       />
-      <Box
-        sx={{
-          // display: "flex",
-          // justifyContent: "space-between",
-          width: "80%",
-          height: "100%",
-          padding: 4,
-          marginX: "auto",
-        }}
-      >
+      <Box>
         <Button
+          sx={{ margin: "10px", fontWeight: 800 }}
           onClick={() => handleOpen("income")}
           color="success"
           variant="contained"
         >
-          ПРИХОД
+          + ПРИХОД
         </Button>
         <Button
+          sx={{ margin: "10px", fontWeight: 800 }}
           onClick={() => handleOpen("expense")}
           color="error"
           variant="contained"
         >
-          РАЗХОД
+          - РАЗХОД
         </Button>
       </Box>
+      {open && (
+        <CustomDialog
+          open={open}
+          setOpen={setOpen}
+          store={store}
+          setRefresh={setRefresh}
+          refresh={refresh}
+        />
+      )}
       <RecordTable store={store} />
     </Box>
   );
