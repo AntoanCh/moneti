@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Store } from "./StoreModel.js";
+import { User } from "./UserModel.js";
 
 export const recordSchema = mongoose.Schema(
   {
@@ -23,10 +24,17 @@ export const recordSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-
     storeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Store",
+    },
+    userName: {
+      type: String,
+      required: true,
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     edited: {
       type: Boolean,

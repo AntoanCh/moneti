@@ -13,8 +13,16 @@ import Chip from "@mui/material/Chip";
 import dayjs from "dayjs";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
-const CustomDialog = ({ open, setOpen, store, setRefresh, refresh }) => {
+const CustomDialog = ({
+  open,
+  setOpen,
+  store,
+  setRefresh,
+  refresh,
+  username,
+}) => {
   const [value, setValue] = useState(0);
+  const [delivery, setDelivery] = useState("");
 
   const handleClose = () => {
     setOpen({ show: false, type: "" });
@@ -22,6 +30,10 @@ const CustomDialog = ({ open, setOpen, store, setRefresh, refresh }) => {
 
   const handleChange = (e) => {
     setValue(parseInt(e.target.value));
+  };
+
+  const handleChangeDelivery = (e) => {
+    setDelivery(e.target.value);
   };
 
   const handleSubmit = async () => {
@@ -35,6 +47,7 @@ const CustomDialog = ({ open, setOpen, store, setRefresh, refresh }) => {
           value: value,
           storeName: store.name,
           storeId: store._id,
+          userName: username,
           edited: false,
         }
       );
@@ -76,9 +89,25 @@ const CustomDialog = ({ open, setOpen, store, setRefresh, refresh }) => {
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description"></DialogContentText>
+        {open.type === "income" && (
+          <TextField
+            select
+            label="ОТ"
+            sx={{ margin: "10px", minWidth: 200 }}
+            onChange={handleChangeDelivery}
+            value={delivery}
+          >
+            <MenuItem value={"Моноутс ЕАД"}>Моноутс ЕАД</MenuItem>
+            <MenuItem value={"Иван"}>Иван</MenuItem>
+            <MenuItem value={"Мартин"}>Мартин</MenuItem>
+            <MenuItem value={"Светослав"}>Светослав</MenuItem>
+            <MenuItem value={"Бойко"}>Бойко</MenuItem>
+          </TextField>
+        )}
         <TextField
           autoFocus
-          sx={{ margin: "20px" }}
+          label="СУМА"
+          sx={{ margin: "10px", width: "60%" }}
           onChange={handleChange}
           value={value}
         />

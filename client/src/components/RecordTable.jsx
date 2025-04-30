@@ -91,7 +91,7 @@ const RecordTable = ({ store }) => {
       {
         accessorKey: "type",
         header: "Вид",
-        size: 120,
+        size: 80,
         editable: false,
         enableGlobalFilter: false,
         filterVariant: "select",
@@ -128,9 +128,16 @@ const RecordTable = ({ store }) => {
         },
       },
       {
+        accessorKey: "userName",
+        header: "Потребител",
+        muiTableBodyCellProps: {
+          align: "center",
+        },
+      },
+      {
         accessorKey: "balance",
         header: "Баланс",
-        size: 180,
+        size: 80,
         editable: false,
         enableGlobalFilter: false,
         muiTableBodyCellProps: {
@@ -151,7 +158,7 @@ const RecordTable = ({ store }) => {
       {
         accessorKey: "value",
         header: "Сума",
-        size: 150,
+        size: 110,
         editable: false,
         muiTableBodyCellProps: {
           align: "center",
@@ -179,6 +186,7 @@ const RecordTable = ({ store }) => {
             : row.balance - row.value,
         id: "balanceAfter",
         header: "Наличност",
+        size: 80,
         Cell: ({ cell }) => (
           <Typography variant="p" sx={{ fontWeight: 800 }}>
             {parseInt(cell.getValue()).toLocaleString("bg-BG", {

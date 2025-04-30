@@ -104,6 +104,7 @@ const StoreBalance = ({ storeName, setRefresh, refresh, username }) => {
           store={store}
           setRefresh={setRefresh}
           refresh={refresh}
+          username={username}
         />
       )}
       <RecordTable store={store} />

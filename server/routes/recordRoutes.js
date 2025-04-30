@@ -12,7 +12,8 @@ router.post("/", async (req, res) => {
       !req.body.type ||
       !req.body.value ||
       !req.body.storeName ||
-      !req.body.storeId
+      !req.body.storeId ||
+      !req.body.userName
     ) {
       return res.status(400).send({
         message: "Send all required fields",
@@ -25,6 +26,7 @@ router.post("/", async (req, res) => {
       value: req.body.value,
       storeName: req.body.storeName,
       storeId: req.body.storeId,
+      userName: req.body.userName,
       edited: req.body.edited,
       editTime: req.body.editTime,
       editValue: req.body.editValue,
@@ -52,6 +54,7 @@ router.put("/:id", async (req, res) => {
       !req.body.value ||
       !req.body.storeName ||
       !req.body.storeId ||
+      !req.body.userName ||
       !req.body.editTime ||
       !req.body.editValue
     ) {
