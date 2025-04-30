@@ -63,7 +63,7 @@ export const UpdatePswrd = async (req, res, next) => {
 export const Login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+
     if (!username || !password) {
       return res.json({ message: "All fields are required" });
     }
@@ -84,7 +84,6 @@ export const Login = async (req, res, next) => {
       user: {
         _id: user._id,
         username: user.username,
-        ip: ip,
       },
     });
     next();

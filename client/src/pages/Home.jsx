@@ -40,7 +40,7 @@ const Home = () => {
       const { data } = await axios.post("http://192.168.0.147:6969/auth", {
         token,
       });
-
+      console.log(data);
       const { status, user, id } = data;
       setUsername(user);
       setUserId(id);
