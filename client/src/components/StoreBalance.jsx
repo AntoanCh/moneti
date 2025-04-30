@@ -7,7 +7,7 @@ import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import CustomDialog from "../components/CustomDialog.jsx";
 
-const StoreBalance = ({ username, setRefresh, refresh }) => {
+const StoreBalance = ({ storeName, setRefresh, refresh, username }) => {
   const [store, setStore] = useState({ name: "", balance: 0 });
   const [open, setOpen] = useState({ show: false, type: "" });
   const [isLoading, setIsLoading] = useState(true);
@@ -22,10 +22,10 @@ const StoreBalance = ({ username, setRefresh, refresh }) => {
         setIsRefetching(true);
       }
 
-      if (username && username.startsWith("H")) {
+      if (storeName) {
         try {
           const res = await axios.get(
-            `http://192.168.0.147:6969/api/stores/name/${username}`
+            `http://192.168.0.147:6969/api/stores/name/${storeName}`
           );
           setStore(res.data[0]);
         } catch (error) {

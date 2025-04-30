@@ -19,36 +19,7 @@ function App() {
         >
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Home />} />
-            {/* <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/users" element={<UsersList />} />
-            <Route path="/sites" element={<SitesList />} />
-            <Route path="/hr" element={<Hr />} />
-            <Route path="/scan" element={<Scan />} />
-            <Route path="/charts" element={<Charts />} />
-            <Route path="/records" element={<Records />} />
-            <Route path="/drop-off/:id" element={<DropOff />} />
-            <Route path="/drivers" element={<DriversList />} />
-            <Route path="/hr/create" element={<CreatePerson />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route
-              path="/vehicles"
-              element={
-                <VehiclesMain
-                  customFilter={customFilter}
-                  setCustomFilter={setCustomFilter}
-                  filter={filter}
-                  setFilter={setFilter}
-                  showExpense={showExpense}
-                  setShowExpense={setShowExpense}
-                  expenseWithTax={expenseWithTax}
-                  setExpenseWithTax={setExpenseWithTax}
-                />
-              }
-            />
-            <Route path="/vehicles/details/:id" element={<ShowVehicle />} />
-            <Route path="/people/details/:id" element={<PersonCard />} /> */}
+            <Route path="/:store" element={<Home />} />
           </Routes>
         </Box>
       </BrowserRouter>

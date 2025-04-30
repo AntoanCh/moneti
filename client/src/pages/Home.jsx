@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/material";
@@ -29,6 +29,8 @@ const Home = () => {
   const [refresh, setRefresh] = useState(false);
   const [changePass, setChangePass] = useState(false);
   const token = localStorage.getItem("token");
+  const params = useParams();
+  console.log(params.store);
 
   useEffect(() => {
     const verifyUser = async () => {
@@ -82,11 +84,15 @@ const Home = () => {
           justifyContent: "space-between",
         }}
       >
-        <Box></Box>
         <Typography
           variant="h1"
           sx={{ fontWeight: 800, fontSize: 24 }}
-        >{`Здравейте, ${username}`}</Typography>
+        >{`Обект: ${params.store}`}</Typography>
+
+        <Typography
+          variant="h1"
+          sx={{ fontWeight: 800, fontSize: 24 }}
+        >{`${username}`}</Typography>
 
         <Box>
           <Button
@@ -110,9 +116,10 @@ const Home = () => {
         alignItems="center"
         sx={{ height: "100%", alignContent: "center" }}
       >
-        {username.startsWith("H") ? (
+        {username !== "OFFICE" ? (
           <StoreBalance
             username={username}
+            storeName={params.store}
             refresh={refresh}
             setRefresh={setRefresh}
           />

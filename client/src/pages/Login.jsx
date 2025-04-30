@@ -77,7 +77,7 @@ const Login = () => {
         } else {
           setError({
             show: true,
-            message: "Неправилна парола или потребителско име",
+            message: "Неправилна парола ",
           });
         }
       } catch (error) {
@@ -85,7 +85,6 @@ const Login = () => {
       }
       setInput({
         ...input,
-        username: "",
         password: "",
       });
     }

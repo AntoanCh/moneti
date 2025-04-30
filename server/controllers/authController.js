@@ -13,8 +13,9 @@ export const Register = async (req, res, next) => {
     }
     const hasedPassword = await bcrypt.hash(password, 12);
     const user = await User.create({ ...req.body, password: hasedPassword });
-    //create store alongside user with the same name
-    const store = await Store.create({ name: username, balance: 0 });
+    //create store alongside user with the same name ---- OLDER VERSION
+    // const store = await Store.create({ name: username, balance: 0 });
+
     //Assign JWT TOKEN to the user
     const token = createSecretToken(user._id);
 
@@ -62,6 +63,7 @@ export const UpdatePswrd = async (req, res, next) => {
 export const Login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
+    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
     if (!username || !password) {
       return res.json({ message: "All fields are required" });
     }
@@ -82,7 +84,7 @@ export const Login = async (req, res, next) => {
       user: {
         _id: user._id,
         username: user.username,
-        role: user.role,
+        ip: ip,
       },
     });
     next();
