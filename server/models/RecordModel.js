@@ -20,6 +20,10 @@ export const recordSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    supplier: {
+      type: String,
+      required: false,
+    },
     storeName: {
       type: String,
       required: true,

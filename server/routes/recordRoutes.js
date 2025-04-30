@@ -11,6 +11,7 @@ router.post("/", async (req, res) => {
       !req.body.time ||
       !req.body.type ||
       !req.body.value ||
+      !req.body.supplier ||
       !req.body.storeName ||
       !req.body.storeId ||
       !req.body.userName
@@ -24,6 +25,7 @@ router.post("/", async (req, res) => {
       balance: req.body.balance,
       type: req.body.type,
       value: req.body.value,
+      supplier: req.body.supplier,
       storeName: req.body.storeName,
       storeId: req.body.storeId,
       userName: req.body.userName,
@@ -52,6 +54,7 @@ router.put("/:id", async (req, res) => {
       !req.body.time ||
       !req.body.type ||
       !req.body.value ||
+      !req.body.supplier ||
       !req.body.storeName ||
       !req.body.storeId ||
       !req.body.userName ||

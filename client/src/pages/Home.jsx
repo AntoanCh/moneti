@@ -116,7 +116,7 @@ const Home = () => {
         alignItems="center"
         sx={{ height: "100%", alignContent: "center" }}
       >
-        {username !== "OFFICE" ? (
+        {username !== "ADMIN" ? (
           <StoreBalance
             username={username}
             storeName={params.store}

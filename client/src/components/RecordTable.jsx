@@ -91,14 +91,14 @@ const RecordTable = ({ store }) => {
       {
         accessorKey: "type",
         header: "Вид",
-        size: 80,
+        size: 150,
         editable: false,
         enableGlobalFilter: false,
         filterVariant: "select",
         muiTableBodyCellProps: {
           align: "center",
         },
-        Cell: ({ cell }) => {
+        Cell: ({ cell, row }) => {
           if (cell.getValue() === "income") {
             return (
               <Chip
@@ -107,7 +107,7 @@ const RecordTable = ({ store }) => {
                   marginX: "2px",
                   fontWeight: 800,
                 }}
-                label="ПРИХОД"
+                label={`ПРИХОД ${row.original.supplier}`}
                 color="success"
               />
             );
@@ -186,7 +186,10 @@ const RecordTable = ({ store }) => {
             : row.balance - row.value,
         id: "balanceAfter",
         header: "Наличност",
-        size: 80,
+        size: 100,
+        muiTableBodyCellProps: {
+          align: "center",
+        },
         Cell: ({ cell }) => (
           <Typography variant="p" sx={{ fontWeight: 800 }}>
             {parseInt(cell.getValue()).toLocaleString("bg-BG", {

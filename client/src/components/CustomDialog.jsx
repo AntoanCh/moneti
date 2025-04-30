@@ -22,7 +22,7 @@ const CustomDialog = ({
   username,
 }) => {
   const [value, setValue] = useState(0);
-  const [delivery, setDelivery] = useState("");
+  const [supplier, setSupplier] = useState("");
 
   const handleClose = () => {
     setOpen({ show: false, type: "" });
@@ -32,8 +32,8 @@ const CustomDialog = ({
     setValue(parseInt(e.target.value));
   };
 
-  const handleChangeDelivery = (e) => {
-    setDelivery(e.target.value);
+  const handleChangeSupplier = (e) => {
+    setSupplier(e.target.value);
   };
 
   const handleSubmit = async () => {
@@ -45,6 +45,7 @@ const CustomDialog = ({
           balance: store.balance,
           type: open.type,
           value: value,
+          supplier: supplier ? supplier : "",
           storeName: store.name,
           storeId: store._id,
           userName: username,
@@ -94,8 +95,8 @@ const CustomDialog = ({
             select
             label="ОТ"
             sx={{ margin: "10px", minWidth: 200 }}
-            onChange={handleChangeDelivery}
-            value={delivery}
+            onChange={handleChangeSupplier}
+            value={supplier}
           >
             <MenuItem value={"Моноутс ЕАД"}>Моноутс ЕАД</MenuItem>
             <MenuItem value={"Иван"}>Иван</MenuItem>
