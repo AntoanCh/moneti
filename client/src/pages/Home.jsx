@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, Navigate, useLocation } from "react-router";
 import axios from "axios";
 import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/material";
@@ -26,24 +26,25 @@ const Home = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
+  const [ip, setIp] = useState("");
   const [refresh, setRefresh] = useState(false);
   const [changePass, setChangePass] = useState(false);
   const token = localStorage.getItem("token");
   const params = useParams();
-  console.log(params.store);
+  const location = useLocation();
 
   useEffect(() => {
     const verifyUser = async () => {
       if (!token) {
-        navigate("/login");
+        navigate("/login", { state: { from: location }, replace: true });
       }
       const { data } = await axios.post("http://192.168.0.147:6969/auth", {
         token,
       });
-      console.log(data);
-      const { status, user, id } = data;
+      const { status, user, id, ip } = data;
       setUsername(user);
       setUserId(id);
+      setIp(ip);
 
       return status
         ? // toast(`${user}`, {
@@ -59,15 +60,34 @@ const Home = () => {
           ""
         : (localStorage.removeItem("token"), navigate("/login"));
     };
+
     verifyUser();
   }, [token, navigate]);
 
+  useEffect(() => {
+    const verifyIp = async () => {
+      if (ip) {
+        console.log(params.store.match(/\d+/)[0]);
+        console.log(ip.match(/(\d+)\.\d+$/)[1]);
+        if (
+          params.store.match(/\d+/)[0] === ip.match(/(\d+)\.\d+$/)[1] ||
+          ip.match(/(\d+)\.\d+$/)[1] == 0
+        ) {
+          console.log("match");
+        } else {
+          console.log("ass");
+        }
+      }
+    };
+    verifyIp();
+  }, [ip]);
   const Logout = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };
 
   const handleChangePass = () => {
+    // verifyUser();
     setChangePass(true);
   };
   return (
@@ -122,6 +142,7 @@ const Home = () => {
             storeName={params.store}
             refresh={refresh}
             setRefresh={setRefresh}
+            // verifyUser={verifyUser}
           />
         ) : (
           <AllBalances />

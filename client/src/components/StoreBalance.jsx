@@ -7,7 +7,13 @@ import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import CustomDialog from "../components/CustomDialog.jsx";
 
-const StoreBalance = ({ storeName, setRefresh, refresh, username }) => {
+const StoreBalance = ({
+  storeName,
+  setRefresh,
+  refresh,
+  username,
+  verifyUser,
+}) => {
   const [store, setStore] = useState({ name: "", balance: 0 });
   const [open, setOpen] = useState({ show: false, type: "" });
   const [isLoading, setIsLoading] = useState(true);
@@ -45,6 +51,7 @@ const StoreBalance = ({ storeName, setRefresh, refresh, username }) => {
   }, [username, refresh]);
 
   const handleOpen = (type) => {
+    verifyUser();
     setOpen({ show: true, type: type });
   };
   return (

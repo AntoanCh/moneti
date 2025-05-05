@@ -107,7 +107,7 @@ const RecordTable = ({ store }) => {
                   marginX: "2px",
                   fontWeight: 800,
                 }}
-                label={`ПРИХОД ${row.original.supplier}`}
+                label={`ПРИХОД - ${row.original.supplier}`}
                 color="success"
               />
             );

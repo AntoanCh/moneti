@@ -5,10 +5,13 @@ import "dayjs/locale/bg";
 import Box from "@mui/material/Box";
 import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
+import { AuthProvider } from "./components/AuthContext.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
 
 function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="bg">
+      {/* <AuthProvider> */}
       <BrowserRouter>
         <Box
           sx={{
@@ -19,10 +22,18 @@ function App() {
         >
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/:store" element={<Home />} />
+            <Route
+              path="/:store"
+              element={
+                <PrivateRoute>
+                  <Home />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </Box>
       </BrowserRouter>
+      {/* </AuthProvider> */}
     </LocalizationProvider>
   );
 }

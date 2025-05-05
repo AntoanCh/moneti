@@ -109,7 +109,7 @@ const RecordTable = ({ store }) => {
         muiTableBodyCellProps: {
           align: "center",
         },
-        Cell: ({ cell }) => {
+        Cell: ({ cell, row }) => {
           if (cell.getValue() === "income") {
             return (
               <Chip
@@ -118,7 +118,7 @@ const RecordTable = ({ store }) => {
                   marginX: "2px",
                   fontWeight: 800,
                 }}
-                label="ПРИХОД"
+                label={`ПРИХОД - ${row.original.supplier}`}
                 color="success"
               />
             );
