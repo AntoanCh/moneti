@@ -5,6 +5,7 @@ import "dayjs/locale/bg";
 import Box from "@mui/material/Box";
 import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
+import Main from "./pages/Main.jsx";
 import { AuthProvider } from "./components/AuthContext.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 
@@ -30,6 +31,7 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route path="/" element={<Main />} />
           </Routes>
         </Box>
       </BrowserRouter>

@@ -67,7 +67,7 @@ const Home = () => {
   useEffect(() => {
     const verifyIp = async () => {
       if (ip) {
-        console.log(params.store.match(/\d+/)[0]);
+        console.log(atob(params.store).match(/\d+/)[0]);
         console.log(ip.match(/(\d+)\.\d+$/)[1]);
         if (
           params.store.match(/\d+/)[0] === ip.match(/(\d+)\.\d+$/)[1] ||
@@ -87,7 +87,6 @@ const Home = () => {
   };
 
   const handleChangePass = () => {
-    // verifyUser();
     setChangePass(true);
   };
   return (
@@ -107,7 +106,7 @@ const Home = () => {
         <Typography
           variant="h1"
           sx={{ fontWeight: 800, fontSize: 24 }}
-        >{`Обект: ${params.store}`}</Typography>
+        >{`Обект: ${atob(params.store)}`}</Typography>
 
         <Typography
           variant="h1"

@@ -30,8 +30,11 @@ const StoreBalance = ({
 
       if (storeName) {
         try {
+          console.log(storeName);
+          console.log(atob(storeName));
+          const decoded = atob(storeName);
           const res = await axios.get(
-            `http://192.168.0.147:6969/api/stores/name/${storeName}`
+            `http://192.168.0.147:6969/api/stores/name/${decoded}`
           );
           setStore(res.data[0]);
         } catch (error) {
@@ -51,7 +54,6 @@ const StoreBalance = ({
   }, [username, refresh]);
 
   const handleOpen = (type) => {
-    verifyUser();
     setOpen({ show: true, type: type });
   };
   return (
