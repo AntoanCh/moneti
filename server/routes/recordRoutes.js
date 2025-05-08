@@ -11,7 +11,6 @@ router.post("/", async (req, res) => {
       !req.body.time ||
       !req.body.type ||
       !req.body.value ||
-      !req.body.supplier ||
       !req.body.storeName ||
       !req.body.storeId ||
       !req.body.userName

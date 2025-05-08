@@ -9,7 +9,7 @@ export const storeSchema = mongoose.Schema(
     },
     balance: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   {

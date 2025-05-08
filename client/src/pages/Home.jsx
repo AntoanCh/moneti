@@ -66,18 +66,18 @@ const Home = () => {
 
   useEffect(() => {
     const verifyIp = async () => {
-      if (ip) {
-        console.log(atob(params.store).match(/\d+/)[0]);
-        console.log(ip.match(/(\d+)\.\d+$/)[1]);
-        if (
-          params.store.match(/\d+/)[0] === ip.match(/(\d+)\.\d+$/)[1] ||
-          ip.match(/(\d+)\.\d+$/)[1] == 0
-        ) {
-          console.log("match");
-        } else {
-          console.log("ass");
-        }
-      }
+      // if (ip) {
+      //   console.log(atob(params.store).match(/\d+/)[0]);
+      //   console.log(ip.match(/(\d+)\.\d+$/)[1]);
+      //   if (
+      //     params.store.match(/\d+/)[0] === ip.match(/(\d+)\.\d+$/)[1] ||
+      //     ip.match(/(\d+)\.\d+$/)[1] == 0
+      //   ) {
+      //     console.log("match");
+      //   } else {
+      //     console.log("ass");
+      //   }
+      // }
     };
     verifyIp();
   }, [ip]);
