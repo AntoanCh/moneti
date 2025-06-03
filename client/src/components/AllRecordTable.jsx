@@ -212,6 +212,20 @@ const RecordTable = ({ store }) => {
           </Typography>
         ),
       },
+      {
+        accessorKey: "comment",
+        header: "Коментар",
+        size: 180,
+        editable: false,
+        muiTableBodyCellProps: {
+          align: "center",
+        },
+        Cell: ({ cell, row }) => (
+          <Typography variant="p" sx={{ fontWeight: 800 }}>
+            {row.original.comment}
+          </Typography>
+        ),
+      },
     ],
     []
   );
