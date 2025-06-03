@@ -31,6 +31,7 @@ router.post("/", async (req, res) => {
       edited: req.body.edited,
       editTime: req.body.editTime,
       editValue: req.body.editValue,
+      comment: req.body.comment,
     };
     const record = await Record.create(newRecord);
 

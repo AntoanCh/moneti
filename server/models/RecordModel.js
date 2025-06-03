@@ -52,6 +52,10 @@ export const recordSchema = mongoose.Schema(
       type: Number,
       required: false,
     },
+    comment: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,

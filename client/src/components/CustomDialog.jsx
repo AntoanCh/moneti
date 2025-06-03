@@ -22,16 +22,21 @@ const CustomDialog = ({
   username,
 }) => {
   const [value, setValue] = useState(0);
+  const [comment, setComment] = useState("");
   const [supplier, setSupplier] = useState("");
 
   const handleClose = () => {
     setOpen({ show: false, type: "" });
+    setComment("");
   };
 
   const handleChange = (e) => {
     setValue(parseInt(e.target.value));
   };
 
+  const handleChangeComment = (e) => {
+    setComment(e.target.value);
+  };
   const handleChangeSupplier = (e) => {
     setSupplier(e.target.value);
   };
@@ -50,11 +55,13 @@ const CustomDialog = ({
           storeId: store._id,
           userName: username,
           edited: false,
+          comment: comment,
         }
       );
       setOpen({ show: false, type: "" });
       setRefresh(!refresh);
       setValue(0);
+      setComment("");
     } catch (error) {}
   };
 
@@ -111,6 +118,13 @@ const CustomDialog = ({
           sx={{ margin: "10px", width: "60%" }}
           onChange={handleChange}
           value={value}
+        />
+        <TextField
+          fullWidth
+          label="Коментар"
+          // sx={{ margin: "10px", width: "60%" }}
+          onChange={handleChangeComment}
+          value={comment}
         />
       </DialogContent>
       <DialogActions>
