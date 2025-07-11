@@ -42,6 +42,7 @@ const RecordTable = ({ store }) => {
       try {
         const res = await axios.get(`http://192.168.0.147:6969/api/records/`);
         setRecords(res.data.data);
+
         //   setRowCount(res.data.count);
       } catch (error) {
         setError({
@@ -56,6 +57,11 @@ const RecordTable = ({ store }) => {
       setIsRefetching(false);
     };
     fetchData();
+    const interval = setInterval(() => {
+      fetchData(); // Fetch every 2 minutes
+    }, 2 * 60 * 1000);
+
+    return () => clearInterval(interval); // Clean up on unmount
   }, []);
 
   const theme = useTheme();

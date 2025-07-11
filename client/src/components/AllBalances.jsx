@@ -34,6 +34,11 @@ const AllBalances = () => {
       setIsRefetching(false);
     };
     fetchData();
+    const interval = setInterval(() => {
+      fetchData(); // Fetch every 2 minutes
+    }, 60 * 1000);
+
+    return () => clearInterval(interval); // Clean up on unmount
   }, []);
   return (
     <Box>
