@@ -82,7 +82,7 @@ const StoreBalance = ({
         id="fullWidth"
         label={"Баланс"}
         value={
-          store.balance
+          store
             ? store.balance.toLocaleString("bg-BG", {
                 style: "currency",
                 currency: "BGN",
