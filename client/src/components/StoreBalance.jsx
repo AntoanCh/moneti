@@ -81,12 +81,16 @@ const StoreBalance = ({
         disabled
         id="fullWidth"
         label={"Баланс"}
-        value={store.balance.toLocaleString("bg-BG", {
-          style: "currency",
-          currency: "BGN",
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
-        })}
+        value={
+          store.balance
+            ? store.balance.toLocaleString("bg-BG", {
+                style: "currency",
+                currency: "BGN",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              })
+            : 0
+        }
       />
       <Box>
         <Button
