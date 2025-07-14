@@ -22,7 +22,7 @@ const StoreBalance = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!store.balance) {
+      if (store && !store.balance) {
         setIsLoading(true);
       } else {
         setIsRefetching(true);

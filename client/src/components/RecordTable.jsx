@@ -38,7 +38,7 @@ const RecordTable = ({ store }) => {
       } else {
         setIsRefetching(true);
       }
-      if (store._id) {
+      if (store && store._id) {
         try {
           const res = await axios.get(
             `http://192.168.0.147:6969/api/records/store/${store._id}`
