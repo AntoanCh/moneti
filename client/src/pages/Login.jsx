@@ -14,7 +14,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ErrorDialog from "../components/ErrorDialog";
 
-const Login = () => {
+const Login = ({ handleClose }) => {
   const [users, setUsers] = useState();
   const [error, setError] = useState({ show: false, message: "" });
   const [showPassword, setShowPassword] = React.useState(false);
@@ -75,7 +75,8 @@ const Login = () => {
         if (status) {
           handleSuccess(message);
           setTimeout(() => {
-            navigate(from, { replace: true }); // redirect after login
+            handleClose();
+            // navigate(from, { replace: true }); // redirect after login
           }, 100);
         } else {
           setError({

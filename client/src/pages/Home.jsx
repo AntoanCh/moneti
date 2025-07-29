@@ -22,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }),
 }));
 
-const Home = () => {
+const Home = ({ open, handleOpen, handleClose }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
@@ -36,7 +36,8 @@ const Home = () => {
   useEffect(() => {
     const verifyUser = async () => {
       if (!token) {
-        navigate("/login", { state: { from: location }, replace: true });
+        // navigate("/login", { state: { from: location }, replace: true });
+        handleOpen();
       }
       const { data } = await axios.post("http://192.168.0.147:6969/auth", {
         token,
@@ -58,32 +59,18 @@ const Home = () => {
           //     theme: "dark",
           //   })
           ""
-        : (localStorage.removeItem("token"), navigate("/login"));
+        : (localStorage.removeItem("token"), handleOpen());
+      //  navigate("/login")
     };
 
     verifyUser();
   }, [token, navigate]);
 
-  useEffect(() => {
-    const verifyIp = async () => {
-      // if (ip) {
-      //   console.log(atob(params.store).match(/\d+/)[0]);
-      //   console.log(ip.match(/(\d+)\.\d+$/)[1]);
-      //   if (
-      //     params.store.match(/\d+/)[0] === ip.match(/(\d+)\.\d+$/)[1] ||
-      //     ip.match(/(\d+)\.\d+$/)[1] == 0
-      //   ) {
-      //     console.log("match");
-      //   } else {
-      //     console.log("ass");
-      //   }
-      // }
-    };
-    verifyIp();
-  }, [ip]);
   const Logout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    // navigate("/login");
+    handleOpen();
+    window.location.reload();
   };
 
   const handleChangePass = () => {

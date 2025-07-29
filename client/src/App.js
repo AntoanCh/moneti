@@ -8,8 +8,13 @@ import Home from "./pages/Home.jsx";
 import Main from "./pages/Main.jsx";
 import { AuthProvider } from "./components/AuthContext.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
+import * as React from "react";
 
 function App() {
+  const [open, setOpen] = React.useState(true);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="bg">
       {/* <AuthProvider> */}
@@ -22,12 +27,20 @@ function App() {
           }}
         >
           <Routes>
-            <Route path="/login" element={<Login />} />
+            {/* <Route path="/login" element={<Login />} /> */}
             <Route
               path="/:store"
               element={
-                <PrivateRoute>
-                  <Home />
+                <PrivateRoute
+                  open={open}
+                  handleOpen={handleOpen}
+                  handleClose={handleClose}
+                >
+                  <Home
+                    open={open}
+                    handleOpen={handleOpen}
+                    handleClose={handleClose}
+                  />
                 </PrivateRoute>
               }
             />
