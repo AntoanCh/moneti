@@ -22,6 +22,7 @@ router.post("/", async (req, res) => {
     const newRecord = {
       time: req.body.time,
       balance: req.body.balance,
+      balanceEUR: req.body.balanceEUR,
       type: req.body.type,
       value: req.body.value,
       supplier: req.body.supplier,

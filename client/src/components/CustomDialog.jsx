@@ -31,6 +31,9 @@ const CustomDialog = ({
   };
 
   const handleChange = (e) => {
+    if (!e.target.value) {
+      e.target.value = 0;
+    }
     setValue(parseInt(e.target.value));
   };
 

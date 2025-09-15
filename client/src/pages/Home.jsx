@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Navigate, useLocation } from "react-router";
 import axios from "axios";
-import { Button, Typography } from "@mui/material";
+import { Button, ButtonGroup, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 import Paper from "@mui/material/Paper";
@@ -10,6 +10,8 @@ import StoreBalance from "../components/StoreBalance.jsx";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LockResetIcon from "@mui/icons-material/LockReset";
 import ChangePass from "../components/ChangePass.jsx";
+import PersonelList from "../components/PersonelList.jsx";
+import StoreList from "../components/StoreList.jsx";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -29,6 +31,8 @@ const Home = ({ open, handleOpen, handleClose }) => {
   const [ip, setIp] = useState("");
   const [refresh, setRefresh] = useState(false);
   const [changePass, setChangePass] = useState(false);
+  const [personelList, setPersonelList] = useState(false);
+  const [storeList, setStoreList] = useState(false);
   const token = localStorage.getItem("token");
   const params = useParams();
   const location = useLocation();
@@ -76,6 +80,19 @@ const Home = ({ open, handleOpen, handleClose }) => {
   const handleChangePass = () => {
     setChangePass(true);
   };
+
+  const handlePersonelList = () => {
+    setPersonelList(true);
+    setStoreList(false);
+  };
+  const handleStoreList = () => {
+    setPersonelList(false);
+    setStoreList(true);
+  };
+  const handleRecordList = () => {
+    setStoreList(false);
+    setPersonelList(false);
+  };
   return (
     <Box>
       <ChangePass
@@ -101,6 +118,34 @@ const Home = ({ open, handleOpen, handleClose }) => {
         >{`${username}`}</Typography>
 
         <Box>
+          {username === "ADMIN" ? (
+            <ButtonGroup sx={{ marginRight: "20px" }} variant="contained">
+              <Button
+                color="success"
+                variant={!personelList && !storeList ? "contained" : "outlined"}
+                onClick={handleRecordList}
+              >
+                СПИСЪК ДВИЖЕНИЯ
+              </Button>
+              <Button
+                color="warning"
+                variant={storeList ? "contained" : "outlined"}
+                onClick={handleStoreList}
+              >
+                СПИСЪК ОБЕКТИ
+              </Button>
+              <Button
+                color="secondary"
+                variant={personelList ? "contained" : "outlined"}
+                onClick={handlePersonelList}
+              >
+                СПИСЪК ПЕРСОНАЛ
+              </Button>
+            </ButtonGroup>
+          ) : (
+            ""
+          )}
+
           <Button
             color="primary"
             sx={{ marginRight: "20px" }}
@@ -130,6 +175,10 @@ const Home = ({ open, handleOpen, handleClose }) => {
             setRefresh={setRefresh}
             // verifyUser={verifyUser}
           />
+        ) : personelList ? (
+          <PersonelList />
+        ) : storeList ? (
+          <StoreList />
         ) : (
           <AllBalances />
         )}

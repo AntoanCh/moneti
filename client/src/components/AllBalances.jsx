@@ -42,7 +42,7 @@ const AllBalances = () => {
   }, []);
   return (
     <Box>
-      {stores.map((store) => (
+      {stores.sort().map((store) => (
         <TextField
           sx={{
             maxWidth: "50%",
