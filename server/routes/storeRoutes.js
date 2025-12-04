@@ -14,6 +14,7 @@ router.post("/", async (req, res) => {
     const newStore = {
       name: req.body.name,
       balance: req.body.balance,
+      balanceEUR: req.body.balanceEUR,
     };
     const store = await Store.create(newStore);
     return res.status(201).send(store);

@@ -18,6 +18,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import CloseIcon from "@mui/icons-material/Close";
+import Link from "@mui/material/Link";
 
 //MRT Imports
 import {
@@ -96,6 +97,24 @@ const StoreList = ({ store }) => {
           <Typography variant="p" sx={{ fontWeight: 800 }}>
             {cell.getValue()}
           </Typography>
+        ),
+      },
+      {
+        accessorFn: (row) => row.name,
+        id: "link",
+        header: "Линк",
+        size: 360,
+        muiTableBodyCellProps: {
+          align: "center",
+        },
+        // filterVariant: "select",
+        Cell: ({ cell }) => (
+          <Link
+            href={`http://192.168.0.147:6969/${btoa(cell.getValue())}`}
+            underline="none"
+          >
+            {`http://192.168.0.147:6969/${btoa(cell.getValue())}`}
+          </Link>
         ),
       },
       {

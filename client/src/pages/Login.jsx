@@ -13,6 +13,7 @@ import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ErrorDialog from "../components/ErrorDialog";
+import Autocomplete from "@mui/material/Autocomplete";
 
 const Login = ({ handleClose }) => {
   const [users, setUsers] = useState();
@@ -44,6 +45,7 @@ const Login = ({ handleClose }) => {
     password: "",
   });
   const { username, password } = input;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInput({
@@ -51,6 +53,13 @@ const Login = ({ handleClose }) => {
       [name]: value,
     });
   };
+  const handleChangeUsername = (e, newValue) => {
+    setInput({
+      ...input,
+      username: newValue,
+    });
+  };
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleSuccess = (msg) => console.log("success");
@@ -112,7 +121,7 @@ const Login = ({ handleClose }) => {
             }}
           >
             <Box sx={{ marginY: "5px" }}>
-              <TextField
+              {/* <TextField
                 fullWidth
                 name="username"
                 select
@@ -132,7 +141,28 @@ const Login = ({ handleClose }) => {
                     0
                   </MenuItem>
                 )}
-              </TextField>
+                  
+              </TextField> */}
+              <Autocomplete
+                blurOnSelect
+                onChange={handleChangeUsername}
+                value={username}
+                disablePortal
+                options={users ? users.sort() : []}
+                sx={{ width: 600 }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Потребител:"
+                    autoComplete="off" // prevents Chrome’s autofill
+                    name="fake-username" // avoid reserved keywords like "username"
+                    inputProps={{
+                      ...params.inputProps,
+                      autoComplete: "new-password", // double protection
+                    }}
+                  />
+                )}
+              />
             </Box>
             <Box sx={{ display: "flex", flexDirection: "row-reverse" }}>
               <span style={{ color: "red" }}> {caps ? "CAPSLOCK ON" : ""}</span>

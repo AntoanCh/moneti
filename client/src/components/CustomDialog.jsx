@@ -12,6 +12,7 @@ import axios from "axios";
 import Chip from "@mui/material/Chip";
 import dayjs from "dayjs";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const CustomDialog = ({
   open,
@@ -24,10 +25,12 @@ const CustomDialog = ({
   const [value, setValue] = useState(0);
   const [comment, setComment] = useState("");
   const [supplier, setSupplier] = useState("");
+  const [currency, setCurrency] = useState("");
 
   const handleClose = () => {
     setOpen({ show: false, type: "" });
     setComment("");
+    setCurrency("");
   };
 
   const handleChange = (e) => {
@@ -43,7 +46,9 @@ const CustomDialog = ({
   const handleChangeSupplier = (e) => {
     setSupplier(e.target.value);
   };
-
+  const handleChangeCurrency = (e) => {
+    setCurrency(e.target.value);
+  };
   const handleSubmit = async () => {
     try {
       const { data } = await axios.post(
@@ -59,12 +64,14 @@ const CustomDialog = ({
           userName: username,
           edited: false,
           comment: comment,
+          currency: currency,
         }
       );
       setOpen({ show: false, type: "" });
       setRefresh(!refresh);
       setValue(0);
       setComment("");
+      setCurrency("");
     } catch (error) {}
   };
 
@@ -118,14 +125,34 @@ const CustomDialog = ({
         <TextField
           autoFocus
           label="СУМА"
-          sx={{ margin: "10px", width: "60%" }}
+          sx={{ margin: "10px", width: "25%" }}
           onChange={handleChange}
           value={value}
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position="start">{currency}</InputAdornment>
+              ),
+            },
+          }}
         />
+
+        <TextField
+          error={!currency ? "error" : ""}
+          select
+          label="ВАЛУТА"
+          sx={{ margin: "10px", width: "15%" }}
+          onChange={handleChangeCurrency}
+          value={currency}
+        >
+          <MenuItem value={""}>Изберете Валута</MenuItem>
+          <MenuItem value={"EUR"}>EUR</MenuItem>
+          <MenuItem value={"BGN"}>BGN</MenuItem>
+        </TextField>
         <TextField
           fullWidth
           label="Коментар"
-          // sx={{ margin: "10px", width: "60%" }}
+          sx={{ margin: "10px", width: "60%" }}
           onChange={handleChangeComment}
           value={comment}
         />

@@ -80,12 +80,47 @@ const StoreBalance = ({
         }}
         disabled
         id="fullWidth"
-        label={"Баланс"}
+        label={"Баланс BGN"}
         value={
-          store
+          store && store.balance
             ? store.balance.toLocaleString("bg-BG", {
                 style: "currency",
                 currency: "BGN",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              })
+            : 0
+        }
+      />
+      <TextField
+        sx={{
+          maxWidth: "50%",
+          marginTop: "20px",
+          marginLeft: "5px",
+
+          "& .MuiInputBase-input": {
+            fontSize: 18,
+            padding: 1,
+
+            fontWeight: 800,
+            textAlign: "center",
+          },
+          "& .MuiInputBase-input.Mui-disabled": {
+            WebkitTextFillColor: "#000",
+          },
+          "& .MuiInputLabel-outlined": {
+            color: "#000",
+            fontWeight: "bold",
+          },
+        }}
+        disabled
+        id="fullWidth"
+        label={"Баланс €"}
+        value={
+          store && store.balanceEUR
+            ? store.balanceEUR.toLocaleString("bg-BG", {
+                style: "currency",
+                currency: "EUR",
                 minimumFractionDigits: 0,
                 maximumFractionDigits: 0,
               })

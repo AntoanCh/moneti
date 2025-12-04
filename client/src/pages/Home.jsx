@@ -107,10 +107,11 @@ const Home = ({ open, handleOpen, handleClose }) => {
           justifyContent: "space-between",
         }}
       >
-        <Typography
-          variant="h1"
-          sx={{ fontWeight: 800, fontSize: 24 }}
-        >{`Обект: ${atob(params.store)}`}</Typography>
+        <Typography variant="h1" sx={{ fontWeight: 800, fontSize: 24 }}>
+          {username === "ADMIN"
+            ? "АДМИНИСТРАТИВЕН"
+            : `Обект: ${atob(params.store)}`}
+        </Typography>
 
         <Typography
           variant="h1"

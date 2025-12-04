@@ -23,6 +23,7 @@ router.post("/", async (req, res) => {
       time: req.body.time,
       balance: req.body.balance,
       balanceEUR: req.body.balanceEUR,
+      currency: req.body.currency,
       type: req.body.type,
       value: req.body.value,
       supplier: req.body.supplier,
@@ -38,9 +39,17 @@ router.post("/", async (req, res) => {
 
     const store = await Store.findByIdAndUpdate(req.body.storeId, {
       balance:
-        req.body.type === "income"
-          ? req.body.balance + req.body.value
-          : req.body.balance - req.body.value,
+        req.body.currency === "BGN"
+          ? req.body.type === "income"
+            ? req.body.balance + req.body.value
+            : req.body.balance - req.body.value
+          : req.body.balance,
+      balanceEUR:
+        req.body.currency === "EUR"
+          ? req.body.type === "income"
+            ? req.body.balanceEUR + req.body.value
+            : req.body.balanceEUR - req.body.value
+          : req.body.balanceEUR,
     });
     return res.status(201).send(record);
   } catch (err) {

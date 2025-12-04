@@ -3,6 +3,7 @@ import axios from "axios";
 import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import AllRecordstable from "./AllRecordTable";
+import Divider, { dividerClasses } from "@mui/material/Divider";
 
 const AllBalances = () => {
   const [stores, setStores] = useState([]);
@@ -43,36 +44,85 @@ const AllBalances = () => {
   return (
     <Box>
       {stores.sort().map((store) => (
-        <TextField
+        <Box
           sx={{
             maxWidth: "50%",
             margin: "10px",
-
-            "& .MuiInputBase-input": {
-              fontSize: 18,
-              padding: 1,
-
-              fontWeight: 800,
-              textAlign: "center",
-            },
-            "& .MuiInputBase-input.Mui-disabled": {
-              WebkitTextFillColor: "#000",
-            },
-            "& .MuiInputLabel-outlined": {
-              color: "#000",
-              fontWeight: "bold",
-            },
+            display: "inline",
           }}
-          disabled
-          id="fullWidth"
-          label={store.name}
-          value={store.balance.toLocaleString("bg-BG", {
-            style: "currency",
-            currency: "BGN",
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0,
-          })}
-        />
+        >
+          <TextField
+            sx={{
+              maxWidth: "50%",
+              marginY: "10px",
+              borderBottom: "solid black",
+              borderRadius: "10px",
+              borderRight: "solid black",
+
+              "& .MuiInputBase-input": {
+                fontSize: 18,
+                padding: 1,
+
+                fontWeight: 800,
+                textAlign: "center",
+              },
+              "& .MuiInputBase-input.Mui-disabled": {
+                WebkitTextFillColor: "#000",
+              },
+              "& .MuiInputLabel-outlined": {
+                color: "#000",
+                fontWeight: "bold",
+              },
+            }}
+            disabled
+            id="fullWidth"
+            label={store.name}
+            value={` ${store.balanceEUR.toLocaleString("bg-BG", {
+              style: "currency",
+              currency: "EUR",
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            })} / ${store.balance.toLocaleString("bg-BG", {
+              style: "currency",
+              currency: "BGN",
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            })}`}
+          />
+          {/* <TextField
+            sx={{
+              maxWidth: "50%",
+              marginY: "10px",
+              borderBottom: "solid black",
+              borderRadius: "10px",
+              borderRight: "solid black",
+
+              "& .MuiInputBase-input": {
+                fontSize: 18,
+                padding: 1,
+
+                fontWeight: 800,
+                textAlign: "center",
+              },
+              "& .MuiInputBase-input.Mui-disabled": {
+                WebkitTextFillColor: "#000",
+              },
+              "& .MuiInputLabel-outlined": {
+                color: "#000",
+                fontWeight: "bold",
+              },
+            }}
+            disabled
+            id="fullWidth"
+            label={store.name}
+            value={store.balanceEUR.toLocaleString("bg-BG", {
+              style: "currency",
+              currency: "EUR",
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            })}
+          /> */}
+        </Box>
       ))}
       <AllRecordstable />
     </Box>

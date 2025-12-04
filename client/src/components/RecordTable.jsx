@@ -143,11 +143,11 @@ const RecordTable = ({ store }) => {
         muiTableBodyCellProps: {
           align: "center",
         },
-        Cell: ({ cell }) => (
+        Cell: ({ cell, row }) => (
           <Typography variant="p" sx={{ fontWeight: 800 }}>
             {parseInt(cell.getValue()).toLocaleString("bg-BG", {
               style: "currency",
-              currency: "BGN",
+              currency: row.original.currency ? row.original.currency : "BGN",
               minimumFractionDigits: 0,
               maximumFractionDigits: 0,
             })}
