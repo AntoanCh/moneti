@@ -110,12 +110,12 @@ const StoreList = ({ store }) => {
         // filterVariant: "select",
         Cell: ({ cell }) => (
           <Link
-            href={`http://192.168.0.147:6969/${btoa(
+            href={`http://localhost:6969/${btoa(
               String.fromCharCode(...new TextEncoder().encode(cell.getValue()))
             )}`}
             underline="none"
           >
-            {`http://192.168.0.147:6969/${btoa(
+            {`http://localhost:6969/${btoa(
               String.fromCharCode(...new TextEncoder().encode(cell.getValue()))
             )}`}
           </Link>
@@ -302,9 +302,7 @@ const StoreList = ({ store }) => {
             color="error"
             variant="contained"
             onClick={() => {
-              axios.delete(
-                `http://192.168.0.147:6969/api/stores/${delDialog._id}`
-              );
+              axios.delete(`http://localhost:6969/api/stores/${delDialog._id}`);
               setDelDialog(false);
               setIsLoading(true);
             }} // ✅ same here
@@ -330,7 +328,7 @@ const StoreList = ({ store }) => {
           onClick={() => {
             if (newName) {
               axios
-                .post("http://192.168.0.147:6969/api/stores", {
+                .post("http://localhost:6969/api/stores", {
                   name: newName,
                   balance: 0,
                   balanceEUR: 0,
