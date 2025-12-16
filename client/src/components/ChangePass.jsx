@@ -35,13 +35,10 @@ const ChangePass = ({ username, changePass, setChangePass, userId }) => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post(
-        "http://192.168.0.147:6969/auth/updatepswrd",
-        {
-          password: newPass,
-          _id: userId,
-        }
-      );
+      const { data } = await axios.post("/auth/updatepswrd", {
+        password: newPass,
+        _id: userId,
+      });
       const { status, message } = data;
 
       setChangePass(false);

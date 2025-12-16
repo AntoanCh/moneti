@@ -53,7 +53,7 @@ const StoreList = ({ store }) => {
       }
 
       try {
-        const res = await axios.get(`http://192.168.0.147:6969/api/stores/`);
+        const res = await axios.get(`/api/stores/`);
         setRecords(res.data.data);
 
         //   setRowCount(res.data.count);
@@ -110,10 +110,14 @@ const StoreList = ({ store }) => {
         // filterVariant: "select",
         Cell: ({ cell }) => (
           <Link
-            href={`http://192.168.0.147:6969/${btoa(cell.getValue())}`}
+            href={`http://192.168.0.147:6969/${btoa(
+              String.fromCharCode(...new TextEncoder().encode(cell.getValue()))
+            )}`}
             underline="none"
           >
-            {`http://192.168.0.147:6969/${btoa(cell.getValue())}`}
+            {`http://192.168.0.147:6969/${btoa(
+              String.fromCharCode(...new TextEncoder().encode(cell.getValue()))
+            )}`}
           </Link>
         ),
       },

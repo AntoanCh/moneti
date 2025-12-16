@@ -40,7 +40,7 @@ const RecordTable = ({ store }) => {
       }
 
       try {
-        const res = await axios.get(`http://192.168.0.147:6969/api/records/`);
+        const res = await axios.get(`/api/records/`);
         setRecords(res.data.data);
 
         //   setRowCount(res.data.count);

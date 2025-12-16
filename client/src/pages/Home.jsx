@@ -110,7 +110,9 @@ const Home = ({ open, handleOpen, handleClose }) => {
         <Typography variant="h1" sx={{ fontWeight: 800, fontSize: 24 }}>
           {username === "ADMIN"
             ? "АДМИНИСТРАТИВЕН"
-            : `Обект: ${atob(params.store)}`}
+            : `Обект: ${new TextDecoder().decode(
+                Uint8Array.from(atob(params.store), (c) => c.charCodeAt(0))
+              )}`}
         </Typography>
 
         <Typography

@@ -31,11 +31,15 @@ const StoreBalance = ({
       if (storeName) {
         try {
           console.log(storeName);
-          console.log(atob(storeName));
-          const decoded = atob(storeName);
-          const res = await axios.get(
-            `http://192.168.0.147:6969/api/stores/name/${decoded}`
+          console.log(
+            new TextDecoder().decode(
+              Uint8Array.from(atob(storeName), (c) => c.charCodeAt(0))
+            )
           );
+          const decoded = new TextDecoder().decode(
+            Uint8Array.from(atob(storeName), (c) => c.charCodeAt(0))
+          );
+          const res = await axios.get(`/api/stores/name/${decoded}`);
           setStore(res.data[0]);
         } catch (error) {
           setError({
