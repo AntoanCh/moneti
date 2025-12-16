@@ -43,7 +43,7 @@ const Home = ({ open, handleOpen, handleClose }) => {
         // navigate("/login", { state: { from: location }, replace: true });
         handleOpen();
       }
-      const { data } = await axios.post("http://localhost:6969/auth", {
+      const { data } = await axios.post("/auth", {
         token,
       });
       const { status, user, id, ip } = data;

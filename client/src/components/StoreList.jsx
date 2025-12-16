@@ -302,7 +302,7 @@ const StoreList = ({ store }) => {
             color="error"
             variant="contained"
             onClick={() => {
-              axios.delete(`http://localhost:6969/api/stores/${delDialog._id}`);
+              axios.delete(`/api/stores/${delDialog._id}`);
               setDelDialog(false);
               setIsLoading(true);
             }} // ✅ same here
@@ -328,7 +328,7 @@ const StoreList = ({ store }) => {
           onClick={() => {
             if (newName) {
               axios
-                .post("http://localhost:6969/api/stores", {
+                .post("/api/stores", {
                   name: newName,
                   balance: 0,
                   balanceEUR: 0,
