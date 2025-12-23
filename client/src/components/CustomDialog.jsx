@@ -56,6 +56,7 @@ const CustomDialog = ({
         {
           time: dayjs(),
           balance: store.balance,
+          balanceEUR: store.balanceEUR,
           type: open.type,
           value: value,
           supplier: supplier ? supplier : "",
@@ -74,7 +75,7 @@ const CustomDialog = ({
       setCurrency("");
     } catch (error) {}
   };
-
+  console.log(store.balance);
   return (
     <Dialog
       disableRestoreFocus
