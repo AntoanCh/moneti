@@ -75,7 +75,7 @@ const CustomDialog = ({
       setCurrency("");
     } catch (error) {}
   };
-  console.log(store.balance);
+
   return (
     <Dialog
       disableRestoreFocus
