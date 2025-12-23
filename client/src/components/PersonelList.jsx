@@ -46,7 +46,7 @@ const PersonelList = ({ store }) => {
       }
 
       try {
-        const res = await axios.get(`/api/users/`);
+        const res = await axios.get(`http://192.168.0.147:6969/api/users/`);
         setRecords(res.data.data);
 
         //   setRowCount(res.data.count);
@@ -176,7 +176,9 @@ const PersonelList = ({ store }) => {
         <Box>
           <IconButton
             onClick={() => {
-              axios.delete(`/api/users/${row.original._id}`);
+              axios.delete(
+                `http://192.168.0.147:6969/api/users/${row.original._id}`
+              );
               setIsLoading(true);
             }}
           >

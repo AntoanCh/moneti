@@ -20,7 +20,7 @@ const AllBalances = () => {
       }
 
       try {
-        const res = await axios.get(`/api/stores`);
+        const res = await axios.get(`http://192.168.0.147:6969/api/stores`);
         setStores(res.data.data);
       } catch (error) {
         setError({

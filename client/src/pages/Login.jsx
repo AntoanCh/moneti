@@ -24,7 +24,7 @@ const Login = ({ handleClose }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("/api/users");
+        const res = await axios.get("http://192.168.0.147:6969/api/users");
         setUsers(res.data.data.map((entrie) => entrie.username));
       } catch (error) {
         setError({
@@ -72,9 +72,12 @@ const Login = ({ handleClose }) => {
       setError({ show: true, message: "Въведете Потребител и Парола" });
     } else {
       try {
-        const { data } = await axios.post("/auth/login", {
-          ...input,
-        });
+        const { data } = await axios.post(
+          "http://192.168.0.147:6969/auth/login",
+          {
+            ...input,
+          }
+        );
         localStorage.setItem("token", data.token);
         const { status, message } = data;
 

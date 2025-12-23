@@ -53,7 +53,7 @@ const StoreList = ({ store }) => {
       }
 
       try {
-        const res = await axios.get(`/api/stores/`);
+        const res = await axios.get(`http://192.168.0.147:6969/api/stores/`);
         setRecords(res.data.data);
 
         //   setRowCount(res.data.count);
@@ -110,12 +110,12 @@ const StoreList = ({ store }) => {
         // filterVariant: "select",
         Cell: ({ cell }) => (
           <Link
-            href={`http://localhost:6969/${btoa(
+            href={`http://192.168.0.147:6969/${btoa(
               String.fromCharCode(...new TextEncoder().encode(cell.getValue()))
             )}`}
             underline="none"
           >
-            {`http://localhost:6969/${btoa(
+            {`http://192.168.0.147:6969/${btoa(
               String.fromCharCode(...new TextEncoder().encode(cell.getValue()))
             )}`}
           </Link>
@@ -302,7 +302,9 @@ const StoreList = ({ store }) => {
             color="error"
             variant="contained"
             onClick={() => {
-              axios.delete(`/api/stores/${delDialog._id}`);
+              axios.delete(
+                `http://192.168.0.147:6969/api/stores/${delDialog._id}`
+              );
               setDelDialog(false);
               setIsLoading(true);
             }} // ✅ same here
@@ -328,7 +330,7 @@ const StoreList = ({ store }) => {
           onClick={() => {
             if (newName) {
               axios
-                .post("/api/stores", {
+                .post("http://192.168.0.147:6969/api/stores", {
                   name: newName,
                   balance: 0,
                   balanceEUR: 0,

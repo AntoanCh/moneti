@@ -51,19 +51,22 @@ const CustomDialog = ({
   };
   const handleSubmit = async () => {
     try {
-      const { data } = await axios.post("/api/records", {
-        time: dayjs(),
-        balance: store.balance,
-        type: open.type,
-        value: value,
-        supplier: supplier ? supplier : "",
-        storeName: store.name,
-        storeId: store._id,
-        userName: username,
-        edited: false,
-        comment: comment,
-        currency: currency,
-      });
+      const { data } = await axios.post(
+        "http://192.168.0.147:6969/api/records",
+        {
+          time: dayjs(),
+          balance: store.balance,
+          type: open.type,
+          value: value,
+          supplier: supplier ? supplier : "",
+          storeName: store.name,
+          storeId: store._id,
+          userName: username,
+          edited: false,
+          comment: comment,
+          currency: currency,
+        }
+      );
       setOpen({ show: false, type: "" });
       setRefresh(!refresh);
       setValue(0);
