@@ -12,6 +12,10 @@ export const recordSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    balanceEUR: {
+      type: Number,
+      required: true,
+    },
     currency: {
       type: String,
       required: true,
