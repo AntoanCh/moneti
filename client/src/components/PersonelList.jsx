@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import Button from "@mui/material/Button";
 
 //MRT Imports
@@ -183,6 +184,16 @@ const PersonelList = ({ store }) => {
             }}
           >
             <DeleteIcon color="error" />
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              axios.delete(
+                `http://192.168.0.147:6969/api/users/${row.original._id}`
+              );
+              setIsLoading(true);
+            }}
+          >
+            <VisibilityIcon color="warning" />
           </IconButton>
         </Box>
       ),

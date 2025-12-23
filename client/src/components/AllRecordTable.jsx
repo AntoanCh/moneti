@@ -152,7 +152,9 @@ const RecordTable = ({ store }) => {
         },
       },
       {
-        accessorKey: "balance",
+        accessorFn: (row) =>
+          row.currency === "EUR" ? row.balanceEUR : row.balance,
+        id: "balance",
         header: "Баланс",
         size: 80,
         editable: false,
@@ -160,11 +162,11 @@ const RecordTable = ({ store }) => {
         muiTableBodyCellProps: {
           align: "center",
         },
-        Cell: ({ cell }) => (
+        Cell: ({ cell, row }) => (
           <Typography variant="p" sx={{ fontWeight: 800 }}>
             {parseInt(cell.getValue()).toLocaleString("bg-BG", {
               style: "currency",
-              currency: "BGN",
+              currency: row.original.currency ? row.original.currency : "BGN",
               minimumFractionDigits: 0,
               maximumFractionDigits: 0,
             })}
@@ -189,7 +191,7 @@ const RecordTable = ({ store }) => {
             {row.original.type === "income" ? "+ " : "- "}
             {cell.getValue()?.toLocaleString?.("bg-BG", {
               style: "currency",
-              currency: "BGN",
+              currency: row.original.currency ? row.original.currency : "BGN",
               minimumFractionDigits: 0,
               maximumFractionDigits: 0,
             })}
@@ -198,7 +200,11 @@ const RecordTable = ({ store }) => {
       },
       {
         accessorFn: (row) =>
-          row.type === "income"
+          row.currency === "EUR"
+            ? row.type === "income"
+              ? row.balanceEUR + row.value
+              : row.balanceEUR - row.value
+            : row.type === "income"
             ? row.balance + row.value
             : row.balance - row.value,
         id: "balanceAfter",
@@ -207,11 +213,11 @@ const RecordTable = ({ store }) => {
         },
         size: 100,
         header: "Наличност",
-        Cell: ({ cell }) => (
+        Cell: ({ cell, row }) => (
           <Typography variant="p" sx={{ fontWeight: 800 }}>
             {parseInt(cell.getValue()).toLocaleString("bg-BG", {
               style: "currency",
-              currency: "BGN",
+              currency: row.original.currency ? row.original.currency : "BGN",
               minimumFractionDigits: 0,
               maximumFractionDigits: 0,
             })}

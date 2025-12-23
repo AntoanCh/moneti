@@ -136,7 +136,7 @@ const RecordTable = ({ store }) => {
       },
       {
         accessorFn: (row) =>
-          row.currency === "BGN" ? row.balance : row.balanceEUR,
+          row.currency === "EUR" ? row.balanceEUR : row.balance,
         id: "balance",
         header: "Баланс",
         size: 80,
@@ -183,7 +183,11 @@ const RecordTable = ({ store }) => {
       },
       {
         accessorFn: (row) =>
-          row.type === "income"
+          row.currency === "EUR"
+            ? row.type === "income"
+              ? row.balanceEUR + row.value
+              : row.balanceEUR - row.value
+            : row.type === "income"
             ? row.balance + row.value
             : row.balance - row.value,
         id: "balanceAfter",

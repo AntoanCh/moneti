@@ -8,6 +8,11 @@ const userSchema = new mongoose.Schema({
     required: [true, "Username is required"],
     uppercase: true,
   },
+  Enabled: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
 
   password: {
     type: String,
